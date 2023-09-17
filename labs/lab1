@@ -1,0 +1,315 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+
+namespace lab1
+{
+    class Person
+    {
+        private string name;
+        private string surname;
+        private System.DateTime dateOfBirth;
+
+        public Person(string name, string surname, DateTime dateOfBirth)
+        {
+            this.name = name;
+            this.surname = surname;
+            this.dateOfBirth = dateOfBirth;
+        }
+
+        public Person()
+        {
+            this.name = "Kolya";
+            this.surname = "Ivanov";
+            this.dateOfBirth = new DateTime(2003, 5, 10);         
+        }
+        
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+            set
+            {
+                this.name = value;
+            }
+        }
+
+        public string Surname
+        {
+            get
+            {
+                return this.surname;
+            }
+            set
+            {
+                this.surname = value;
+            }
+        }
+
+        public DateTime DateOfBirth
+        {
+            get
+            {
+                return this.dateOfBirth;
+            }
+            set
+            {
+                this.dateOfBirth = value;
+            }
+        }
+
+        public int YearOfBirth
+        {
+            get
+            {
+                return Convert.ToInt32(this.dateOfBirth.Year);
+            }
+            set
+            {
+                this.DateOfBirth = Convert.ToDateTime(value);
+            }
+        }
+
+        public override string ToString() 
+        {
+            return string.Format("{0} {1}. Date of birth: {2}", this.name, this.surname, this.dateOfBirth);
+        }
+
+        public virtual string ToShortString()
+        {
+            return string.Format(this.name + " " + this.surname);
+        }
+    }
+
+
+
+    enum Education { Specialist, Bachelor, SecondEducation }
+
+
+
+    class Exam
+    {
+        public string Discipline { get; set; }
+        public int Grade { get; set; }
+        public System.DateTime ExamDate { get; set; }
+
+        public Exam(string discipline, int grade, DateTime examDate)
+        {
+            this.Discipline = discipline;
+            this.Grade = grade;
+            this.ExamDate = examDate;
+        }
+
+        public Exam()
+        {
+            this.Discipline = "TFCP";
+            this.Grade = 5;
+            this.ExamDate = new System.DateTime (2023, 6, 20);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("According to the discipline {0} assessment {1}. Exam date {2}.", this.Discipline, this.Grade, this.ExamDate);
+        }
+    }
+
+
+
+    class Student
+    {
+        private Person person;
+        private Education education;
+        private int group;
+        private readonly List<Exam> exams = new List<Exam>();
+
+        public Student(Person person, Education education, int group)
+        {
+            this.person = person;
+            this.education = education;
+            this.group = group;
+        }
+
+        public Student()
+        {
+            this.person = new Person();
+            this.education = Education.Bachelor;
+            this.group = 22;
+        }
+
+        public Person Person
+        {
+            get
+            {
+                return person; 
+            }
+            set
+            {
+                person = value;
+            }
+        }
+
+        public Education Education
+        {
+            get
+            {
+                return education;
+            }
+            set
+            {
+                education = value;
+            }
+        }
+
+        public int Group
+        {
+            get
+            {
+                return group;
+            }
+            set
+            {
+                group = value;
+            }
+        }
+
+        public Exam[] Exams
+        {
+            get
+            {
+                return exams.ToArray();
+            }
+
+        }
+
+        public double AvgRate
+        {
+            get
+            {
+                double sum = 0;
+
+                foreach(Exam ex in Exams)
+                {
+                    sum += ex.Grade;
+                }
+
+                if(exams.Count == 0)
+                    return 0;
+                else
+                    return sum / exams.Count;
+            }
+        }
+
+        public bool this[Education index]
+        {
+            get
+            {
+                return this.Education == index;
+            }
+        }
+
+        public void AddExams(params Exam[] exams)
+        {
+            this.exams.AddRange(exams);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Person: {0}\n Education: {1}. Group: {2}\n exams: {3}\n ", person, education, group, string.Join(", ", exams));
+        }
+
+        public string ToShortString()
+        {
+            return string.Format("Person: {0}\n Education: {1}. Group: {2}\n AvgRate: {3:0.00}\n", person, education, group, AvgRate);
+        }
+    }
+
+
+
+    class Program
+    {
+        static void Main()
+        {
+            // 1.
+            Student stud = new Student();
+            System.Console.WriteLine(stud.ToShortString());
+
+            System.Console.WriteLine();
+
+            //2.
+            Console.WriteLine(stud[Education.Bachelor]);
+            Console.WriteLine(stud[Education.Specialist]);
+            Console.WriteLine(stud[Education.SecondEducation]);
+
+            System.Console.WriteLine();
+
+            //3.
+            stud = new Student(new Person("Vova", "Below", new DateTime(2000, 4, 15)), Education.Specialist, 31);
+            Console.WriteLine(stud.ToString());
+
+            System.Console.WriteLine();
+
+            //4.
+            stud.AddExams(new Exam("TFCP", 5, new DateTime(2023, 6, 29)), new Exam("C#", 5, new DateTime(2023, 6, 22)));
+
+            Console.WriteLine(stud.ToString());
+
+
+            //5.
+            Exam[] one_dimensional = new Exam[10];
+            Exam[,] two_dimensional = new Exam[2, 5];
+            Exam[][] stepwise = new Exam[4][];
+
+            stepwise[0] = new Exam[1];
+            stepwise[1] = new Exam[2];
+            stepwise[2] = new Exam[3];
+            stepwise[3] = new Exam[4];
+
+            long milliseconds = DateTime.Now.Ticks;
+
+            for (int p = 0; p < 10000; p++)
+                for (int i = 0; i < 10; i++)
+                    one_dimensional[i] = new Exam();
+
+            // for (int i = 0; i < 10; i++)
+            //     Console.WriteLine(one_dimensional[i] + " ");
+
+            milliseconds = DateTime.Now.Ticks - milliseconds;
+
+            Console.WriteLine("one_dimensional time wasted: " + milliseconds + "\n");
+
+            milliseconds = DateTime.Now.Ticks;
+
+            for (int p = 0; p < 10000; p++)
+                for (int i = 0; i < 2; i++)
+                    for (int j = 0; j < 5; j++)
+                        two_dimensional[i, j] = new Exam();
+
+            // for (int i = 0; i < 2; i++)
+            //     for (int j = 0; j < 5; j++)
+            //         Console.WriteLine(two_dimensional[i, j] + " ");
+
+            milliseconds = DateTime.Now.Ticks - milliseconds;
+
+            Console.WriteLine("two_dimensional time wasted: " + milliseconds + "\n");
+
+            milliseconds = DateTime.Now.Ticks;
+
+            for (int p = 0; p < 10000; p++)
+                for (int i = 0; i < 4; i++)
+                    for (int j = 0; j < i + 1; j++)
+                        stepwise[i][j] = new Exam();
+
+            // for (int i = 0; i < 4; i++)
+            //     for (int j = 0; j < i + 1; j++)
+            //         Console.WriteLine(stepwise[i][j] + " ");
+
+            milliseconds = DateTime.Now.Ticks - milliseconds;
+
+            Console.WriteLine("stepwise time wasted: " + milliseconds + "\n");
+
+            milliseconds = DateTime.Now.Ticks; 
+        }
+    }
+}
