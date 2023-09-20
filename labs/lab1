@@ -50,10 +50,7 @@ namespace lab1
 
         public DateTime DateOfBirth
         {
-            get
-            {
-                return this.dateOfBirth;
-            }
+            get => this.dateOfBirth;
             set
             {
                 this.dateOfBirth = value;
@@ -216,6 +213,7 @@ namespace lab1
 
         public override string ToString()
         {
+            // string a = $"Person {Person}"
             return string.Format("Person: {0}\n Education: {1}. Group: {2}\n exams: {3}\n ", person, education, group, string.Join(", ", exams));
         }
 
@@ -257,59 +255,102 @@ namespace lab1
 
 
             //5.
-            Exam[] one_dimensional = new Exam[10];
-            Exam[,] two_dimensional = new Exam[2, 5];
-            Exam[][] stepwise = new Exam[4][];
 
-            stepwise[0] = new Exam[1];
-            stepwise[1] = new Exam[2];
-            stepwise[2] = new Exam[3];
-            stepwise[3] = new Exam[4];
+            int rows = 0;
+            int coloms = 0;
+            
+            System.Console.WriteLine("Введите количество строк");
+            rows = Convert.ToInt32(System.Console.ReadLine());
 
-            long milliseconds = DateTime.Now.Ticks;
+            System.Console.WriteLine("Введите количество столбцов");
+            coloms = Convert.ToInt32(System.Console.ReadLine());
 
+            // Exam[] one_dimensional = new Exam[10];
+            // Exam[,] two_dimensional = new Exam[2, 5];
+            // Exam[][] stepwise = new Exam[4][];
+
+            // stepwise[0] = new Exam[1];
+            // stepwise[1] = new Exam[2];
+            // stepwise[2] = new Exam[3];
+            // stepwise[3] = new Exam[4];
+
+            Exam[] one_dimensional = new Exam[rows*coloms];
+            Exam[,] two_dimensional = new Exam[rows, coloms];
+            Exam[][] stepwise = new Exam[coloms-1][];
+
+            // for(int index = 0; index<coloms - 1; index++)
+            //     stepwise[index] = new Exam[index + 1];
+
+            stepwise[0] = new Exam[300];
+            stepwise[1] = new Exam[100];
+            stepwise[2] = new Exam[400];
+            stepwise[3] = new Exam[200];
+
+            // long milliseconds = DateTime.Now.Ticks;
+            Stopwatch stopwach = new Stopwatch();
+
+            stopwach.Start();
             for (int p = 0; p < 10000; p++)
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < rows*coloms; i++)
                     one_dimensional[i] = new Exam();
 
             // for (int i = 0; i < 10; i++)
             //     Console.WriteLine(one_dimensional[i] + " ");
 
-            milliseconds = DateTime.Now.Ticks - milliseconds;
+            // milliseconds = DateTime.Now.Ticks - milliseconds;
+            stopwach.Stop();
+            TimeSpan ts_one_dimensional = stopwach.Elapsed;
 
-            Console.WriteLine("one_dimensional time wasted: " + milliseconds + "\n");
+            Console.WriteLine("one_dimensional time wasted: " + ts_one_dimensional + "\n");
 
-            milliseconds = DateTime.Now.Ticks;
+            // milliseconds = DateTime.Now.Ticks;
+            stopwach.Reset();
+            stopwach.Start();
 
             for (int p = 0; p < 10000; p++)
-                for (int i = 0; i < 2; i++)
-                    for (int j = 0; j < 5; j++)
+                for (int i = 0; i < rows; i++)
+                    for (int j = 0; j < coloms; j++)
                         two_dimensional[i, j] = new Exam();
 
             // for (int i = 0; i < 2; i++)
             //     for (int j = 0; j < 5; j++)
             //         Console.WriteLine(two_dimensional[i, j] + " ");
 
-            milliseconds = DateTime.Now.Ticks - milliseconds;
+            // milliseconds = DateTime.Now.Ticks - milliseconds;
+            stopwach.Stop();
+            TimeSpan ts_two_dimensional = stopwach.Elapsed;
 
-            Console.WriteLine("two_dimensional time wasted: " + milliseconds + "\n");
+            Console.WriteLine("two_dimensional time wasted: " + ts_two_dimensional + "\n");
 
-            milliseconds = DateTime.Now.Ticks;
+            // milliseconds = DateTime.Now.Ticks;
+            stopwach.Reset();
+            stopwach.Start();
 
+            // for (int p = 0; p < 10000; p++)
+            //     for (int i = 0; i < coloms - 1; i++)
+            //         for (int j = 0; j < i + 1; j++)
+            //             stepwise[i][j] = new Exam();
             for (int p = 0; p < 10000; p++)
-                for (int i = 0; i < 4; i++)
-                    for (int j = 0; j < i + 1; j++)
-                        stepwise[i][j] = new Exam();
+                for (int i=0; i < 300; i++)
+                    stepwise[0][i] = new Exam();
+                for (int i=0; i < 100; i++)
+                    stepwise[1][i] = new Exam();
+                for (int i=0; i < 400; i++)
+                    stepwise[2][i] = new Exam();
+                for (int i=0; i < 200; i++)
+                    stepwise[3][i] = new Exam();
 
             // for (int i = 0; i < 4; i++)
             //     for (int j = 0; j < i + 1; j++)
             //         Console.WriteLine(stepwise[i][j] + " ");
 
-            milliseconds = DateTime.Now.Ticks - milliseconds;
+            // milliseconds = DateTime.Now.Ticks - milliseconds;
+            stopwach.Stop();
+            TimeSpan ts_stepwise = stopwach.Elapsed;
 
-            Console.WriteLine("stepwise time wasted: " + milliseconds + "\n");
+            Console.WriteLine("stepwise time wasted: " + ts_stepwise + "\n");
 
-            milliseconds = DateTime.Now.Ticks; 
+            // milliseconds = DateTime.Now.Ticks; 
         }
     }
 }
