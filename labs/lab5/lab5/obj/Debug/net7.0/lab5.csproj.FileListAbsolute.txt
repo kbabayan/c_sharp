@@ -1,0 +1,17 @@
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/obj/Debug/net7.0/lab5.GeneratedMSBuildEditorConfig.editorconfig
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/obj/Debug/net7.0/lab5.AssemblyInfoInputs.cache
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/obj/Debug/net7.0/lab5.AssemblyInfo.cs
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/obj/Debug/net7.0/lab5.csproj.CoreCompileInputs.cache
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/bin/Debug/net7.0/lab5
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/bin/Debug/net7.0/lab5.deps.json
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/bin/Debug/net7.0/lab5.runtimeconfig.json
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/bin/Debug/net7.0/lab5.dll
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/bin/Debug/net7.0/lab5.pdb
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/obj/Debug/net7.0/lab5.dll
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/obj/Debug/net7.0/refint/lab5.dll
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/obj/Debug/net7.0/lab5.pdb
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/obj/Debug/net7.0/lab5.genruntimeconfig.cache
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/obj/Debug/net7.0/ref/lab5.dll
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/obj/Debug/net7.0/lab5.csproj.AssemblyReference.cache
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/bin/Debug/net7.0/Newtonsoft.Json.dll
+/Users/konstantin/Documents/code/c#/labs/lab5/lab5/obj/Debug/net7.0/lab5.csproj.CopyComplete
