@@ -1,1 +1,2 @@
-all labs from vmk msu on c#
+all labs from pm miet 2 course, 3 sem
+
